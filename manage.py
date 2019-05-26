@@ -13,7 +13,7 @@ manager.add_command('db', MigrateCommand)
 
 PORT = os.getenv("SERVE_PORT", "5003")
 
-manager.add_command("runserver", Server(port=PORT))
+manager.add_command("runserver", Server(host='0.0.0.0',port=PORT))
 
 if __name__ == '__main__':
     manager.run()
