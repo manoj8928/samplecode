@@ -2,7 +2,7 @@ from flask_restplus import Resource, Namespace
 from flask import request, jsonify
 from models.user import User
 from models import db
-from datetime import datetime
+import datetime
 
 USER_API = Namespace('hello', description='User Api')
 
@@ -13,12 +13,19 @@ class Users(Resource):
 
     def get(self, username):
         user = User.query.filter(User.username == username).first()
-        birthday = user.dob
-        now = datetime.now()
-        days = self.calculate_dates(birthday, now)
-        if days >= 365 :
+        td = datetime.date.today()
+
+        bd = user.dob  # birth date in a datetime format
+        nbd = datetime.date(td.year, bd.month, bd.day)  # next birthday
+        if (nbd - td).days < 0:  # if the ate already passed for this year
+            nbd = datetime.date(td.year + 1, bd.month, bd.day)
+
+        if (nbd - td).days > 0:
+            return {"Message": "Hello {}! your birthday is in {} days".format(username, (nbd - td).days)}
+        else:
             return {"Message": "Hello {}! Happy Birthday! ".format(username)}
-        return {"Message": "Hello {}! your birthday is in {} days".format(username, days)}
+
+
 
     def put(self, username):
         raw_input = request.get_json()
@@ -35,6 +42,7 @@ class Users(Resource):
     def calculate_dates(original_date, now):
         delta1 = datetime(now.year, original_date.month, original_date.day)
         delta2 = datetime(now.year + 1, original_date.month, original_date.day)
+        print("Max === {}".format(max(delta1, delta2)))
         days = (max(delta1, delta2) - now).days
         return days
 
