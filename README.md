@@ -16,7 +16,8 @@ Then:
 python manage.py db upgrade
 
 Run Test Cases
-python -m "nose" -v tests/api/
+python -m nose --nocapture --cover-package=api  -v  tests/
 
 Start development server, navigate to url
+
 python manage.py runserver
