@@ -6,7 +6,7 @@ class Base:
     DEBUG = True
     DB_USER = os.getenv('RDS_USERNAME', 'demo')
     DB_PWD = os.getenv('RDS_PASSWORD', 'password')
-    DB_HOST = os.getenv('RDS_HOST', 'demo-db.ctjleurv3bvc.eu-central-1.rds.amazonaws.com') + ':' + os.getenv('RDS_PORT', '5432')
+    DB_HOST = os.getenv('RDS_HOST', 'demo.ctjleurv3bvc.eu-central-1.rds.amazonaws.com') + ':' + os.getenv('RDS_PORT', '5432')
     DB_NAME = os.getenv('RDS_DB_NAME', 'demo')
     DB_SCHEMA_NAME = os.getenv('DB_SCHEMA_NAME', 'config')
 
