@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: api-deployment
+  namespace: monitoring
+  labels:
+    app: api
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: "{{DOCKER_IMAGE}}"
+        ports:
+        - containerPort: 5003
