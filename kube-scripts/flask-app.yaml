@@ -19,14 +19,32 @@ spec:
         - containerPort: 5003
         env:
         - name: RDS_USERNAME
-          value: "demo"
-        - name: RDS_PASSWORD
-          value: "password"
+          valueFrom:
+            configMapKeyRef:
+              name: dbuser
+              key: RDS_USERNAME
         - name: RDS_HOST
-          value: "demo.ctjleurv3bvc.eu-central-1.rds.amazonaws.com"
-        - name: RDS_DB_NAME 
-          value: "demo"
+          valueFrom:
+            configMapKeyRef:
+              name: dbhost
+              key: RDS_HOST
+        - name: RDS_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: dbname
+              key: RDS_DB_NAME
         - name: DB_SCHEMA_NAME
-          value: "config"
+          valueFrom:
+            configMapKeyRef:
+              name: dbschema
+              key: DB_SCHEMA_NAME
         - name: RDS_PORT
-          value: "5432"
+          valueFrom:
+            configMapKeyRef:
+              name: dbport
+              key: RDS_PORT
+        - name: RDS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dbpassword
+              key: RDS_PASSWORD
