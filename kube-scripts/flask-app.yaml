@@ -17,3 +17,16 @@ spec:
         image: "{{DOCKER_IMAGE}}"
         ports:
         - containerPort: 5003
+		env:
+        - name: RDS_USERNAME 
+          value: "demo"
+        - name: RDS_PASSWORD 
+          value: "password"
+		- name: RDS_HOST 
+          value: "demo.ctjleurv3bvc.eu-central-1.rds.amazonaws.com"
+        - name: RDS_DB_NAME 
+          value: "demo"
+		- name: DB_SCHEMA_NAME 
+          value: "config"
+		- name: RDS_PORT 
+          value: "5432"
