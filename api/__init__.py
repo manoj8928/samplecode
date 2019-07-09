@@ -9,7 +9,7 @@ def create_app(app_settings):
 
     @app.route("/")
     def index():
-        return "Catalog Service"
+        return "Birthday API"
 
     app.register_blueprint(API_BLUEPRINT)
     db.init_app(app)
